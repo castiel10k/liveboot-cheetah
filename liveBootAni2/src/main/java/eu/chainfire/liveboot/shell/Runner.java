@@ -299,7 +299,7 @@ implements
             float color = (mDark ? 0.0f : 0.2f * alpha);
             GLES20.glClearColor(color, color, color, alpha);
         } else {
-            float color = (mDark ? 0.75f : 0.25f) * alpha;
+            float color = (mDark ? 0.75f : 0.25f) * 0;
             GLES20.glClearColor(0.0f, 0.0f, 0.0f, color);
         }        
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);        
