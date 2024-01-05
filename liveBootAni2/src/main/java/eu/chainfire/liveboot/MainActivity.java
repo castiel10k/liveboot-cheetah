@@ -19,13 +19,13 @@ package eu.chainfire.liveboot;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Surface;
 import android.view.WindowManager;
-
-import eu.chainfire.librootjava.Logger;
-import eu.chainfire.liveboot.R;
 
 public class MainActivity extends Activity implements InAppPurchases.OnPurchaseListener {
     private Handler handler = new Handler();
@@ -53,8 +53,32 @@ public class MainActivity extends Activity implements InAppPurchases.OnPurchaseL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(getDeviceDefaultOrientation());
-        setContentView(R.layout.activity_main); 
-    }    
+        setContentView(R.layout.activity_main);
+    }
+
+    private String getScreenSize() {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int height = displayMetrics.heightPixels;
+        int width = displayMetrics.widthPixels;
+        height = height + getNavigationBarHeight();
+        return height +" "+ width;
+    }
+
+    private int getNavigationBarHeight() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            DisplayMetrics metrics = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(metrics);
+            int usableHeight = metrics.heightPixels;
+            getWindowManager().getDefaultDisplay().getRealMetrics(metrics);
+            int realHeight = metrics.heightPixels;
+            if (realHeight > usableHeight)
+                return realHeight - usableHeight;
+            else
+                return 0;
+        }
+        return 0;
+    }
 
     @Override
     protected void onUserLeaveHint() {
@@ -76,6 +100,8 @@ public class MainActivity extends Activity implements InAppPurchases.OnPurchaseL
         super.onStart();
         autoExit = true;
         autoExitCounter++;
+        String test = getScreenSize();
+        Log.d("TEST", test);
     }
 
     public void setAutoExit(boolean autoExit) {
