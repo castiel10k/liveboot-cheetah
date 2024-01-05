@@ -117,7 +117,7 @@ public class MainActivity extends Activity implements InAppPurchases.OnPurchaseL
         if (requestCode == REQUEST_WRITE_EXTERNAL_STORAGE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission granted, proceed with writing the file
-                writeToFileInDocuments();
+
             } else {
                 // Permission denied, handle it accordingly (e.g., show a message to the user)
             }
@@ -142,7 +142,7 @@ public class MainActivity extends Activity implements InAppPurchases.OnPurchaseL
             );
         } else {
             // Permission is already granted, proceed with writing the file
-            writeToFileInDocuments();
+            writeToFileInDocuments(test);
         }
         /** String jsonString;
         try {
@@ -159,9 +159,9 @@ public class MainActivity extends Activity implements InAppPurchases.OnPurchaseL
 
     }
 
-    private void writeToFileInDocuments() {
-        String fileName = "example.txt";
-        String content = "Hello, this is the content of the file.";
+    private void writeToFileInDocuments(String test) {
+        String fileName = "liveboot.txt";
+        String content = test;
 
         // Get the Documents directory on external storage
         File documentsDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
@@ -180,7 +180,7 @@ public class MainActivity extends Activity implements InAppPurchases.OnPurchaseL
             fos.close();
 
             // Log success
-            Log.d("File Write", "File written to Documents directory: " + file.getAbsolutePath());
+            Log.d("TEST", "File written to Documents directory: " + file.getAbsolutePath());
 
         } catch (IOException e) {
             e.printStackTrace();
