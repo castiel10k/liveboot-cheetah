@@ -130,7 +130,7 @@ public class MainActivity extends Activity implements InAppPurchases.OnPurchaseL
         autoExit = true;
         autoExitCounter++;
         String test = getScreenSize();
-        Log.d("TEST", test);
+        Log.d("TESTINGO", test);
         
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -180,7 +180,7 @@ public class MainActivity extends Activity implements InAppPurchases.OnPurchaseL
             fos.close();
 
             // Log success
-            Log.d("TEST", "File written to Documents directory: " + file.getAbsolutePath());
+            Log.d("TESTINGO", "File written to Documents directory: " + file.getAbsolutePath());
 
         } catch (IOException e) {
             e.printStackTrace();
